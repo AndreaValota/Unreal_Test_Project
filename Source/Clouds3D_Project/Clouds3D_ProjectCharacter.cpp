@@ -47,8 +47,17 @@ AClouds3D_ProjectCharacter::AClouds3D_ProjectCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	Health = MaxHealth;
 }
 
+void AClouds3D_ProjectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Health = MaxHealth;
+	Score = 0;
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -88,13 +97,28 @@ float AClouds3D_ProjectCharacter::TakeDamage(float DamageAmount, FDamageEvent co
 	DamageCaused = FMath::Min(Health, DamageCaused);
 	Health -= DamageCaused;
 
-	//Healthbar->SetPercent(Health/MaxHealth);
+	Score -= 10;
 
 	if (Health <= 0)
 	{
 		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
 	return DamageCaused;
+}
+
+float AClouds3D_ProjectCharacter::GetMaxHP()
+{
+	return MaxHealth;
+}
+
+float AClouds3D_ProjectCharacter::GetCurrentHP()
+{
+	return Health;
+}
+
+float AClouds3D_ProjectCharacter::GetScore()
+{
+	return Score;
 }
 
 
@@ -176,6 +200,7 @@ void AClouds3D_ProjectCharacter::Interact()
 			if (AButtonActor* Button = Cast<AButtonActor>(Actor))
 			{
 				Button->Pressed();
+				Score += 100;
 			}
 		}
 	}

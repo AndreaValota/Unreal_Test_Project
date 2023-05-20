@@ -32,6 +32,18 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetMaxHP(); 
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetCurrentHP();
+
+	UFUNCTION(BlueprintPure, Category = "Score")
+	float GetScore();
+
+	//UFUNCTION(BlueprintCallable, Category = "Health")
+	//void UpdateCurrentHP(float Health);
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -63,11 +75,16 @@ protected:
 
 	void Interact();
 
-	UPROPERTY(EditAnywhere)
-	float MaxHealth = 100.f;
+	UPROPERTY(EditAnywhere, Category = "Health")
+	float MaxHealth;
 
-	UPROPERTY()
-	float Health = MaxHealth;
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+	float Health;
+
+	UPROPERTY(VisibleAnywhere, Category = "Score")
+	float Score;
+
+	virtual void BeginPlay() override;
 
 protected:
 	// APawn interface
