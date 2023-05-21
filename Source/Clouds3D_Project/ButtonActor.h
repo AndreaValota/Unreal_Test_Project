@@ -12,8 +12,8 @@ UCLASS()
 class CLOUDS3D_PROJECT_API AButtonActor : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AButtonActor();
 
@@ -22,27 +22,24 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "LinkedDoor")
-	ADoorActor* Door;
+		ADoorActor* Door;
 
 	UPROPERTY(EditAnywhere, Category = "LinkedTurrets")
-	TArray<ATurretActor*> LinkedTurrets;
+		TArray<ATurretActor*> LinkedTurrets;
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
-	class UStaticMeshComponent* ButtonMesh;
+		class UStaticMeshComponent* ButtonMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = "CollisionMesh")
-	class UBoxComponent* CollisionMesh = nullptr;
+		class UBoxComponent* CollisionMesh = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "ActivetedMaterial")
-	class UMaterial* ActivatedMaterial = nullptr;
+		class UMaterial* ActivatedMaterial = nullptr;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	void Pressed();
-
-	UFUNCTION()
-	void OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 };

@@ -11,6 +11,7 @@
 #include "ButtonActor.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 #include <Clouds3D_Project/Clouds3D_ProjectGameMode.h>
+#include <Clouds3D_Project/GodModeButtonActor.h>
 
 //////////////////////////////////////////////////////////////////////////
 // AClouds3D_ProjectCharacter
@@ -50,6 +51,7 @@ AClouds3D_ProjectCharacter::AClouds3D_ProjectCharacter()
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
 	Health = MaxHealth;
+	GodMode = false;
 }
 
 void AClouds3D_ProjectCharacter::BeginPlay()
@@ -95,10 +97,13 @@ void AClouds3D_ProjectCharacter::SetupPlayerInputComponent(class UInputComponent
 
 float AClouds3D_ProjectCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	float DamageCaused = Super::TakeDamage(DamageAmount,DamageEvent,EventInstigator,DamageCauser);
+	float DamageCaused = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
 	DamageCaused = FMath::Min(Health, DamageCaused);
-	Health -= DamageCaused;
+
+	if (!GodMode) {
+		Health -= DamageCaused;
+	}
 
 	Score -= 10;
 
@@ -204,6 +209,12 @@ void AClouds3D_ProjectCharacter::Interact()
 			{
 				Button->Pressed();
 				Score += 100;
+			}
+
+			if (AGodModeButtonActor* Button = Cast<AGodModeButtonActor>(Actor))
+			{
+				Button->Pressed();
+				GodMode = true;
 			}
 		}
 	}

@@ -86,6 +86,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Score")
 	float Score;
 
+	UPROPERTY()
+	bool GodMode;
+
 	virtual void BeginPlay() override;
 
 protected:
