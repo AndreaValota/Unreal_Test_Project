@@ -16,10 +16,15 @@ class AClouds3D_ProjectGameMode : public AGameModeBase
 public:
 	AClouds3D_ProjectGameMode();
 
+	void SetGamePaused(bool Pause);
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUD", Meta = (BlueprintProtected = "true"))
 	TSubclassOf<class UUserWidget> PlayerHUDClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "PauseMenu", Meta = (BlueprintProtected = "true"))
+	TSubclassOf<class UUserWidget> PauseMenuClass;
 
 	UPROPERTY()
 	class UUserWidget* CurrentWidget;

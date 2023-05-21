@@ -75,6 +75,8 @@ protected:
 
 	void Interact();
 
+	void Pause();
+
 	UPROPERTY(EditAnywhere, Category = "Health")
 	float MaxHealth;
 

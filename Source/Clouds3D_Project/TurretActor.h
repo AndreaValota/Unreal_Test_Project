@@ -29,6 +29,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 		float TurretRange = 1000.f;
 
+	UPROPERTY(EditAnywhere)
+		float TurretDamage = 10.f;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

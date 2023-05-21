@@ -34,3 +34,34 @@ AClouds3D_ProjectGameMode::AClouds3D_ProjectGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void AClouds3D_ProjectGameMode::SetGamePaused(bool Pause)
+{
+	if (Pause) {
+		APlayerController* const MyPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+		if (MyPlayer != NULL)
+		{
+			MyPlayer->SetPause(Pause);
+			MyPlayer->SetShowMouseCursor(true);
+			CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PauseMenuClass);
+
+			if (CurrentWidget != nullptr)
+			{
+				CurrentWidget->AddToViewport();
+			}
+		}
+	}/* else
+	{
+		APlayerController* const MyPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+		if (MyPlayer != NULL)
+		{
+			MyPlayer->SetPause(Pause);
+			CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
+
+			if (CurrentWidget != nullptr)
+			{
+				CurrentWidget->AddToViewport();
+			}
+		}
+	}*/
+}

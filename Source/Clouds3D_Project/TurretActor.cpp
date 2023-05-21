@@ -89,8 +89,8 @@ void ATurretActor::Shoot()
 		if (OutHit.Actor->GetActorLabel() == "MainCharacter")
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, ShootSound, TurretMesh->GetComponentLocation());
-			FPointDamageEvent DamageEvent(10.f, OutHit,  TurretMesh->GetRightVector(),nullptr);
-			OutHit.GetActor()->TakeDamage(10.f, DamageEvent, GetInstigatorController(), this);
+			FPointDamageEvent DamageEvent(TurretDamage, OutHit,  TurretMesh->GetRightVector(),nullptr);
+			OutHit.GetActor()->TakeDamage(TurretDamage, DamageEvent, GetInstigatorController(), this);
 		}
 	}
 }

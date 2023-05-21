@@ -27,6 +27,15 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "LinkedTurrets")
 	TArray<ATurretActor*> LinkedTurrets;
 
+	UPROPERTY(VisibleAnywhere, Category = "Mesh")
+	class UStaticMeshComponent* ButtonMesh;
+
+	UPROPERTY(VisibleAnywhere, Category = "CollisionMesh")
+	class UBoxComponent* CollisionMesh = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "ActivetedMaterial")
+	class UMaterial* ActivatedMaterial = nullptr;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -35,13 +44,5 @@ public:
 
 	UFUNCTION()
 	void OnComponentOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-private:
-
-	UPROPERTY(VisibleAnywhere, Category = "Mesh")
-	class UStaticMeshComponent* ButtonMesh;
-
-	UPROPERTY(VisibleAnywhere, Category = "CollisionMesh")
-	class UBoxComponent* CollisionMesh = nullptr;
 
 };

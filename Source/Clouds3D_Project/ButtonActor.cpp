@@ -40,18 +40,23 @@ void AButtonActor::Pressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interacted with Button"));
 
+	ButtonMesh->SetMaterial(0,ActivatedMaterial);
+
 	if (Door)
 	{
 		Door->ToggleDoor();
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("No Linked Door"));
+	}
 
+	if (LinkedTurrets.Num() != 0)
+	{
 		for (ATurretActor* Turret : LinkedTurrets)
 		{
 			Turret->SetActorTickEnabled(false);
 			GetWorldTimerManager().ClearAllTimersForObject(Turret);
 		}
-	}
-	else {
-		UE_LOG(LogTemp, Error, TEXT("No Linked Door"));
 	}
 }
 

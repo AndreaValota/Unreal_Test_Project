@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "ButtonActor.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
+#include <Clouds3D_Project/Clouds3D_ProjectGameMode.h>
 
 //////////////////////////////////////////////////////////////////////////
 // AClouds3D_ProjectCharacter
@@ -70,6 +71,8 @@ void AClouds3D_ProjectCharacter::SetupPlayerInputComponent(class UInputComponent
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AClouds3D_ProjectCharacter::Interact);
+
+	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AClouds3D_ProjectCharacter::Pause);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AClouds3D_ProjectCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AClouds3D_ProjectCharacter::MoveRight);
@@ -205,3 +208,11 @@ void AClouds3D_ProjectCharacter::Interact()
 		}
 	}
 }
+
+void AClouds3D_ProjectCharacter::Pause()
+{
+	AClouds3D_ProjectGameMode* GameMode = (AClouds3D_ProjectGameMode*)GetWorld()->GetAuthGameMode();
+
+	GameMode->SetGamePaused(true);
+}
+
