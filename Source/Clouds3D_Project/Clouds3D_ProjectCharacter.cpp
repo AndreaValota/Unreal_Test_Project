@@ -52,6 +52,7 @@ AClouds3D_ProjectCharacter::AClouds3D_ProjectCharacter()
 
 	Health = MaxHealth;
 	GodMode = false;
+	RespawnSet = false;
 }
 
 void AClouds3D_ProjectCharacter::BeginPlay()
@@ -60,6 +61,12 @@ void AClouds3D_ProjectCharacter::BeginPlay()
 
 	Health = MaxHealth;
 	Score = 0;
+}
+
+void AClouds3D_ProjectCharacter::SetRespawn(FVector Location)
+{
+	RespawnLocation = Location;
+	RespawnSet = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -109,7 +116,14 @@ float AClouds3D_ProjectCharacter::TakeDamage(float DamageAmount, FDamageEvent co
 
 	if (Health <= 0)
 	{
-		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+		if (RespawnSet)
+		{
+			Health = MaxHealth;
+			SetActorLocation(RespawnLocation);
+		}
+		else {
+			UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+		}
 	}
 	return DamageCaused;
 }

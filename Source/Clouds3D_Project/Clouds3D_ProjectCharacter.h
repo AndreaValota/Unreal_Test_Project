@@ -41,6 +41,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Score")
 	float GetScore();
 
+	UFUNCTION()
+	void SetRespawn(FVector Location);
+
 	//UFUNCTION(BlueprintCallable, Category = "Health")
 	//void UpdateCurrentHP(float Health);
 
@@ -73,8 +76,10 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	UFUNCTION()
 	void Interact();
 
+	UFUNCTION()
 	void Pause();
 
 	UPROPERTY(EditAnywhere, Category = "Health")
@@ -88,6 +93,12 @@ protected:
 
 	UPROPERTY()
 	bool GodMode;
+
+	UPROPERTY()
+	FVector RespawnLocation;
+
+	UPROPERTY()
+	bool RespawnSet;
 
 	virtual void BeginPlay() override;
 

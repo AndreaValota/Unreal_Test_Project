@@ -36,7 +36,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private: 
+	UFUNCTION()
+	virtual void Shoot();
+
+protected: 
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Root;
 
@@ -49,19 +52,10 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		USoundBase* ShootSound;
 
-	//UPROPERTY(EditDefaultsOnly)
-	//	class UStaticMeshComponent* Beam;
-
 	UFUNCTION()
 		void UpdateLookAtDirection();
 
 	UPROPERTY()
 		FTimerHandle TimerHandle;
-
-	//UFUNCTION(BlueprintCallable)
-	//	void SetBeamLength(float Length);
-
-	UFUNCTION()
-		void Shoot();
 
 };

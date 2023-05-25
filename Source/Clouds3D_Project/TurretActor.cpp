@@ -20,11 +20,6 @@ ATurretActor::ATurretActor()
 
 	PedestalMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PedestalMesh"));
 	PedestalMesh->SetupAttachment(Root);
-
-	//Beam = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Beam"));
-	//Beam->SetupAttachment(TurretMesh);
-
-	//SetBeamLength(BeamLength);
 }
 
 // Called when the game starts or when spawned
@@ -41,10 +36,7 @@ void ATurretActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//GetWorldTimerManager().SetTimer(TimerHandle, this, &ATurretActor::UpdateLookAtDirection, 1.f, true, 1.f);
-
 	UpdateLookAtDirection();
-	//Shoot();
 }
 
 void ATurretActor::UpdateLookAtDirection() 
@@ -69,11 +61,6 @@ void ATurretActor::UpdateLookAtDirection()
 
 }
 
-/*void ATurretActor::SetBeamLength(float Length)
-{
-	Beam->SetRelativeScale3D(FVector(Beam->GetRelativeScale3D().X, Length / (400) , Beam->GetRelativeScale3D().Z));
-	Beam->SetRelativeLocation(0, Length / (8), 0));
-}*/
 
 void ATurretActor::Shoot()
 {
