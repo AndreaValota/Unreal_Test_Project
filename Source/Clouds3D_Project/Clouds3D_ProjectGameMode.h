@@ -18,7 +18,16 @@ public:
 
 	void SetGamePaused(bool Pause);
 
+	//UFUNCTION(BlueprintCallable, Category = "MainMenu")
+	//void ShowMainMenu();
+
+	UFUNCTION(BlueprintCallable, Category = "HUD")
+	void ShowPlayerHUD();
+
 protected:
+
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "MainMenu", Meta = (BlueprintProtected = "true"))
+	//TSubclassOf<class UUserWidget> MainMenuClass;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "HUD", Meta = (BlueprintProtected = "true"))
 	TSubclassOf<class UUserWidget> PlayerHUDClass;
@@ -28,6 +37,7 @@ protected:
 
 	UPROPERTY()
 	class UUserWidget* CurrentWidget;
+
 };
 
 

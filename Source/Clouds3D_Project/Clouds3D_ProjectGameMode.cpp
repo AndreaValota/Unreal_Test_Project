@@ -12,17 +12,7 @@ void AClouds3D_ProjectGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AClouds3D_ProjectCharacter* MyCharacter = Cast<AClouds3D_ProjectCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
-
-	if (PlayerHUDClass != nullptr)
-	{
-		CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
-
-		if (CurrentWidget != nullptr)
-		{
-			CurrentWidget->AddToViewport();
-		}
-	}
+	ShowPlayerHUD();
 }
 
 AClouds3D_ProjectGameMode::AClouds3D_ProjectGameMode()
@@ -50,18 +40,33 @@ void AClouds3D_ProjectGameMode::SetGamePaused(bool Pause)
 				CurrentWidget->AddToViewport();
 			}
 		}
-	}/* else
-	{
-		APlayerController* const MyPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
-		if (MyPlayer != NULL)
-		{
-			MyPlayer->SetPause(Pause);
-			CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
+	}
+}
 
-			if (CurrentWidget != nullptr)
-			{
-				CurrentWidget->AddToViewport();
-			}
+/*void AClouds3D_ProjectGameMode::ShowMainMenu()
+{
+	if (MainMenuClass != nullptr)
+	{
+		CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), MainMenuClass);
+
+		if (CurrentWidget != nullptr)
+		{
+			CurrentWidget->AddToViewport();
+			APlayerController* const MyPlayer = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
+			MyPlayer->SetShowMouseCursor(true);
 		}
-	}*/
+	}
+}*/
+
+void AClouds3D_ProjectGameMode::ShowPlayerHUD()
+{
+	if (PlayerHUDClass != nullptr)
+	{
+		CurrentWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDClass);
+
+		if (CurrentWidget != nullptr)
+		{
+			CurrentWidget->AddToViewport();
+		}
+	}
 }
