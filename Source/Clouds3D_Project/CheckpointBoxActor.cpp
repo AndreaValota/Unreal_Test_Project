@@ -37,7 +37,7 @@ void ACheckpointBoxActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AA
 {
 	FVector CheckpointLocation = this->GetActorLocation();
 
-	if (OtherActor->GetActorLabel() == "MainCharacter")
+	if (OtherActor->IsA(AClouds3D_ProjectCharacter::StaticClass()))
 	{
 		Cast<AClouds3D_ProjectCharacter>(OtherActor)->SetRespawn(this->GetActorLocation());
 	}

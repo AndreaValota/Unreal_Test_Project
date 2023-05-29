@@ -49,7 +49,7 @@ void ATurretActor::UpdateLookAtDirection()
 
 	for (AActor* Character : ActorsToFind)
 	{
-		if (Character->GetActorLabel() == "MainCharacter") {
+		if (Character->IsA(AClouds3D_ProjectCharacter::StaticClass())) {
 			End = Character->GetActorLocation();
 			//UE_LOG(LogTemp, Error, TEXT("END %s"), *End.ToString());
 		}
@@ -73,7 +73,7 @@ void ATurretActor::Shoot()
 
 	if (GetWorld()->LineTraceSingleByChannel(OUT OutHit, Start, End, ECollisionChannel::ECC_Camera, CollQueryParams))
 	{
-		if (OutHit.Actor->GetActorLabel() == "MainCharacter")
+		if (OutHit.Actor->IsA(AClouds3D_ProjectCharacter::StaticClass()))
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, ShootSound, TurretMesh->GetComponentLocation());
 			FPointDamageEvent DamageEvent(TurretDamage, OutHit,  TurretMesh->GetRightVector(),nullptr);

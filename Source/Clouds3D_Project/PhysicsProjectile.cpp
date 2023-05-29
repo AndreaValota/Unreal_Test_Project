@@ -47,7 +47,7 @@ void APhysicsProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 		Destroy();
 	}
 
-	if ((OtherActor != nullptr) && (OtherActor->GetActorLabel() == "MainCharacter"))
+	if ((OtherActor != nullptr) && (OtherActor->IsA(AClouds3D_ProjectCharacter::StaticClass())))
 	{
 		OtherActor->TakeDamage(ProjectileDamage, FDamageEvent(), GetInstigatorController(), this);
 	}

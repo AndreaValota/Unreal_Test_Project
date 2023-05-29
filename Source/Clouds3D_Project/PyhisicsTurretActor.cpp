@@ -3,6 +3,7 @@
 
 #include "PyhisicsTurretActor.h"
 #include "PhysicsProjectile.h"
+#include "Clouds3D_ProjectCharacter.h"
 #include <Runtime/Engine/Classes/Kismet/KismetMathLibrary.h>
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 
@@ -17,7 +18,7 @@ void APyhisicsTurretActor::Shoot()
 
 	if (GetWorld()->LineTraceSingleByChannel(OUT OutHit, Start, End, ECollisionChannel::ECC_Camera, CollQueryParams))
 	{
-		if (OutHit.Actor->GetActorLabel() == "MainCharacter")
+		if (OutHit.Actor->IsA(AClouds3D_ProjectCharacter::StaticClass()))
 		{
 			if (ProjectileClass != nullptr)
 			{
