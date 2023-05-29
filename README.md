@@ -7,3 +7,5 @@ The project contains a third person game where the player has complete 3 rooms i
 
 The guidelines file contains a more in depth list of the developed features. \
 The report file contains explanations about the developing process as well as basic documentation about the project.
+
+![GameplayExample](https://github.com/AndreaValota/Unreal_Test_Project/blob/main/Unreal_Test.gif)
